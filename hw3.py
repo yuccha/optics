@@ -6,20 +6,13 @@ import math
 
 lb_min = 495	# nm
 lb_max = 505	# nm
-#l = 9900*10**(-9)		# nm
-#l = 10100*10**(-9)		# nm
-#l = 19800*10**(-9)		# nm
-#l = 20200*10**(-9)		# nm
-#c = 3*10**8
+g1 = gdisplay(xmax=505, xmin=495)#, ymax=0.6, ymin=-0.6)
+f1 = gcurve(color = color.cyan)
+f2 = gcurve(color = color.red)
+f3 = gcurve(color = color.green)
 
-#----
-#fsr = c/(2*n*l*math.cos(theta))
-#v_max = c/lb_min
-#v_min = c/lb_max
-#print 'Free spectrum range = %s' %(fsr)
-#print 'Real spectrum range = %s' %(v_max-v_min)
-
-#----
+f_list = [f1, f2, f3]
+f4 = gcurve(color = color.yellow)
 
 def spec(lbda, a=1.0, b=0.1, c=0.1, lb_a=502, lb_ae=0.4, lb_c=501, lb_ce=0.2, lb_b=497, gamma=0.6):
 	return a*math.exp(-((lbda-lb_a)/lb_ae)**2)+c*math.exp(-((lbda-lb_c)/lb_ce)**2)+b*(gamma/2)/((lbda-lb_b)**2+(gamma/2)**2)
@@ -32,15 +25,25 @@ def trans(lbda, length, R, n=1.0, theta=0.0):
 len_start = [9900.0, 19800.0, 9900.0]
 len_end = [10100.0, 20200.0, 10100.0]
 R_list = [0.8, 0.99, 0.99]
-dt = 0.001
+m_list = [20.0, 40.0, 20.0]
+#len_start = [9900.0, 9900.0, 9900.0]
+#len_end = [10100.0, 10100.0, 10100.0]
+#R_list = [0.9, 0.95, 0.99]
+#m_list = [20.0, 20.0, 20.0]
+dt = 0.01
 ##
 for i_case in range(0, 3):
-	intensity = 0
 	for leng in arange(len_start[i_case], len_end[i_case], dt):
+		rate(10000)
+		intensity = 0
 		for lmbda in arange (lb_min, lb_max, dt):
 			intensity += spec(lmbda)*trans(lmbda, leng, R_list[i_case])
-		# plot the intensity versus len/20 (=lambda!!)
-		# need to add an array consisting the graph's color!
+		if i_case == 0:
+			posi2 = vector(leng/20, spec(leng/20))
+			f4.plot(pos = posi2)
+		posi = vector(leng/m_list[i_case], intensity)
+		f_list[i_case].plot(pos = posi)
+print 'end'
 
 
 
