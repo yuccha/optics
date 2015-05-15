@@ -3,14 +3,20 @@ from visual.graph import *
 import math
 
 # for case I first: I ll plot the ordinary etalon diagram.
-
+#print u"\u03B1"
 lb_min = 495	# nm
 lb_max = 505	# nm
-g1 = gdisplay(xmax=505, xmin=495, ymax=1.0, ymin=0.0)
-f4 = gcurve(color = color.yellow)
+label_pos = 507
+strg = 'Wavelength (' + u"\u03BB" + ')'
+g1 = gdisplay(xtitle = strg, ytitle = 'Normalized Spectrum (a.u.)', xmax=505, xmin=495, ymax=1.05, ymin=0.0)
+f4 = gdots(color = color.yellow, size = 4)
 f1 = gcurve(color = color.cyan)
 f2 = gcurve(color = color.red)
 f3 = gcurve(color = color.green)
+label(display=g1.display, pos=(label_pos, 1.0), text='Cyan curve: Case 1', opacity = 0, linecolor = scene.background, color = color.cyan, xoffset = -1, line = 0)
+label(display=g1.display, pos=(label_pos, 0.9), text='Red curve: Case 2', opacity = 0, linecolor = scene.background, color = color.red, xoffset = -1, line = 0)
+label(display=g1.display, pos=(label_pos, 0.8), text='Green curve: Case 3', opacity = 0, linecolor = scene.background, color = color.green, xoffset = -1, line = 0)
+label(display=g1.display, pos=(label_pos, 0.7), text='Yellow dots: Light source', opacity = 0, linecolor = scene.background, color = color.yellow, xoffset = -1, line = 0)
 
 f_list = [f1, f2, f3]
 
@@ -40,6 +46,7 @@ length_ed = 10100.0
 #m_list = [20.0, 20.0, 20.0]
 dt = 0.1
 dtt = 0.01
+iterator = 0
 ##
 
 for leng in arange(length_st, length_ed, dt):
@@ -58,7 +65,9 @@ for leng in arange(length_st, length_ed, dt):
 #			else:
 #				intensity[i_case] += spec(lmbda)*trans(lmbda, leng, R_list[i_case])
 		f_list[i_case].plot(pos = (leng/m_list[0], pk_insty[i_case]))
-	f4.plot(pos = (leng/20, spec(leng/20)))
+	if iterator % 25 == 0:
+		f4.plot(pos = (leng/20, spec(leng/20)))
+	iterator += 1
 
 
 #for i_case in range(0, 3):
