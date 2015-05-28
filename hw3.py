@@ -13,9 +13,9 @@ f4 = gdots(color = color.yellow, size = 4)
 f1 = gcurve(color = color.cyan)
 f2 = gcurve(color = color.red)
 f3 = gcurve(color = color.green)
-label(display=g1.display, pos=(label_pos, 1.0), text='Cyan curve: Case 1', opacity = 0, linecolor = scene.background, color = color.cyan, xoffset = -1, line = 0)
-label(display=g1.display, pos=(label_pos, 0.9), text='Red curve: Case 2', opacity = 0, linecolor = scene.background, color = color.red, xoffset = -1, line = 0)
-label(display=g1.display, pos=(label_pos, 0.8), text='Green curve: Case 3', opacity = 0, linecolor = scene.background, color = color.green, xoffset = -1, line = 0)
+label(display=g1.display, pos=(label_pos, 1.0), text='Cyan curve: Etalon 1', opacity = 0, linecolor = scene.background, color = color.cyan, xoffset = -1, line = 0)
+label(display=g1.display, pos=(label_pos, 0.9), text='Red curve: Etalon 2', opacity = 0, linecolor = scene.background, color = color.red, xoffset = -1, line = 0)
+label(display=g1.display, pos=(label_pos, 0.8), text='Green curve: Etalon 3', opacity = 0, linecolor = scene.background, color = color.green, xoffset = -1, line = 0)
 label(display=g1.display, pos=(label_pos, 0.7), text='Yellow dots: Light source', opacity = 0, linecolor = scene.background, color = color.yellow, xoffset = -1, line = 0)
 
 f_list = [f1, f2, f3]
@@ -68,6 +68,7 @@ for leng in arange(length_st, length_ed, dt):
 	# plot the light source graph only when iterator % 25 == 0, in order to cut down on the numbers of dots.
 	iterator += 1
 
+print 'Etalon III, with with R=0.99 and thickness t scans from 9900 nm to 10100 nm, is a better Fabry-Perot etalon in measuring the spectrum'
 print 'end'
 
 
