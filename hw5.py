@@ -6,7 +6,7 @@ lamda = 500E-9
 #d = 50E-6
 scn = 1E-6
 tms = 500
-rds_tm = 50
+rds_tm = 25
 rds = scn*rds_tm
 
 side = np.linspace(-scn*tms,scn*tms,tms)
@@ -18,7 +18,7 @@ E_ca = x**2+y**2 < rds**2
 D1 = np.fft.fft2(E_ca)
 D1 = np.fft.fftshift(D1)
 
-I_ca = np.abs(D1)/((lamda*R)**2)
+I_ca = (np.abs(D1)/(lamda*R))**2
 
 f1 = plt.figure(1)
 plt.imshow(I_ca)
@@ -33,7 +33,7 @@ E_ca_sm = x**2+y**2 < (rds/2)**2
 D1 = np.fft.fft2(E_ca_sm)
 D1 = np.fft.fftshift(D1)
 
-I_ca_sm = np.abs(D1)/((lamda*R)**2)
+I_ca_sm = (np.abs(D1)/(lamda*R))**2
 
 f3 = plt.figure(3)
 plt.imshow(I_ca_sm)
@@ -52,7 +52,7 @@ E_zh = M2 ^ M1 | M3
 D1 = np.fft.fft2(E_zh)
 D1 = np.fft.fftshift(D1)
 
-I_zh = np.abs(D1)/((lamda*R)**2)
+I_zh = (np.abs(D1)/(lamda*R))**2
 
 f5 = plt.figure(5)
 plt.imshow(I_zh)
